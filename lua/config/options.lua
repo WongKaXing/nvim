@@ -18,8 +18,11 @@ opt.shiftwidth = 4
 opt.expandtab = true
 opt.autoindent = true
 
--- 防止包裹
-opt.wrap = false
+-- 软换行（长行自动折行显示，不修改实际内容）
+opt.wrap = true
+opt.linebreak = true
+opt.breakindent = true
+opt.showbreak = "↪ "
 
 -- 光标行
 opt.cursorline = true
