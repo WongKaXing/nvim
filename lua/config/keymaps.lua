@@ -55,7 +55,6 @@ keymap.set("n", "<leader>ya", "<cmd>Yazi cwd<cr>", { desc = "打开nvim工作目
 keymap.set("n", "<leader>yz", "<cmd>Yazi toggle<cr>", { desc = "继续上次yazi会话" })
 
 -- markdownperview
-
 keymap.set("n", "<leader>mm", ":MarkdownPreview<CR>", { desc = "MarkdownPreview" })
 keymap.set("n", "<leader>ms", ":MarkdownPreviewStop<CR>", { desc = "MarkdownPreviewStop" })
 keymap.set("n", "<leader>mt", ":MarkdownPreviewToggle<CR>", { desc = "MarkdownPreviewToggle" })
