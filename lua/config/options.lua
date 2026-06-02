@@ -44,3 +44,8 @@ opt.smartcase = true
 -- 外观
 opt.termguicolors = true
 opt.signcolumn = "yes"
+
+-- gf (goto file): 智能打开光标下的文件路径
+opt.suffixesadd:append({ ".lua", ".ts", ".tsx", ".js", ".jsx", ".py", ".go", ".rs", ".c", ".h", ".cpp", ".hpp", ".css", ".scss", ".json", ".yaml", ".yml", ".toml", ".md", ".vim", ".sh", ".bash", ".zsh" })
+opt.path:append("**")
+vim.opt.includeexpr = "v:lua.require'tools.gf'.includeexpr()"

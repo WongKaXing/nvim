@@ -59,6 +59,10 @@ keymap.set("n", "<leader>mm", ":MarkdownPreview<CR>", { desc = "MarkdownPreview"
 keymap.set("n", "<leader>ms", ":MarkdownPreviewStop<CR>", { desc = "MarkdownPreviewStop" })
 keymap.set("n", "<leader>mt", ":MarkdownPreviewToggle<CR>", { desc = "MarkdownPreviewToggle" })
 
+-- gf (goto file): 打开光标下的引用文件
+-- 内置: gf=当前窗口, <C-w>gf=新标签
+keymap.set("n", "<leader>gf", "<C-w>gf", { desc = "新标签打开引用文件" })
+
 -- bufferline
 -- 你可以通过点击关闭图标或右键点击任意标签来关闭缓冲区
 vim.opt.termguicolors = true
