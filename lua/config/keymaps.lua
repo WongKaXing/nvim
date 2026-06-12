@@ -39,8 +39,6 @@ keymap.set("n", "<C-H>", ":bprevious<CR>", { desc = "切换右侧buffer" })
 -----------------------------------------------------------------------------------
 
 -- ---------- 插件 ---------- ---
--- nvim-tree
-keymap.set("n", "<leader>E", ":NvimTreeToggle<CR>", { desc = "打开/关闭文件树" })
 keymap.set("n", "<S-h>", "<C-w>h", { desc = "向左移动焦点" })
 keymap.set("n", "<S-l>", "<C-w>l", { desc = "向右移动焦点" })
 keymap.set("n", "<S-k>", "<C-w>k", { desc = "向上移动焦点" })
@@ -63,7 +61,4 @@ keymap.set("n", "<leader>mt", ":MarkdownPreviewToggle<CR>", { desc = "MarkdownPr
 -- 内置: gf=当前窗口, <C-w>gf=新标签
 keymap.set("n", "<leader>gf", "<C-w>gf", { desc = "新标签打开引用文件" })
 
--- bufferline
 -- 你可以通过点击关闭图标或右键点击任意标签来关闭缓冲区
-vim.opt.termguicolors = true
-require("bufferline").setup({})
