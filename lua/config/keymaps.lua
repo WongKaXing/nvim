@@ -15,12 +15,25 @@ local keymap = vim.keymap
 -- keymap.set("i", "jk", "<ESC>")
 keymap.set("i", "jk", "<Esc>")
 
+-- Cmd+V 粘贴（系统剪贴板）
+keymap.set("i", "<D-v>", '<C-o>"+p', { desc = "粘贴" })
+
 -- ---------- 视觉模式 ---------- ---
 -- 单行或多行移动
 -- keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 -- keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
+-- Cmd+V 从系统剪贴板粘贴
+keymap.set("n", "<D-v>", '"+p', { desc = "粘贴" })
+
+-- Cmd+C 复制到系统剪贴板
+keymap.set("v", "<D-c>", '"+y', { desc = "复制" })
+
 -- ---------- 正常模式 ---------- ---
+-- J / K 向下/上滚动 15 行
+keymap.set("n", "J", "15j", { desc = "向下移动15行" })
+keymap.set("n", "K", "15k", { desc = "向上移动15行" })
+
 -- 窗口
 keymap.set("n", "<leader>sv", "<C-w>v", { desc = "水平新增窗口" }) -- 水平新增窗口
 keymap.set("n", "<leader>sh", "<C-w>s", { desc = "垂直新增窗口" }) -- 垂直新增窗口
@@ -41,7 +54,6 @@ keymap.set("n", "<C-H>", ":bprevious<CR>", { desc = "切换右侧buffer" })
 -- ---------- 插件 ---------- ---
 keymap.set("n", "<S-h>", "<C-w>h", { desc = "向左移动焦点" })
 keymap.set("n", "<S-l>", "<C-w>l", { desc = "向右移动焦点" })
-keymap.set("n", "<S-k>", "<C-w>k", { desc = "向上移动焦点" })
 
 -- Twilight
 keymap.set("n", "<leader>tw", ":Twilight<CR>", { desc = "开启Twilight专注模式" })
@@ -61,4 +73,7 @@ keymap.set("n", "<leader>mt", ":MarkdownPreviewToggle<CR>", { desc = "MarkdownPr
 -- 内置: gf=当前窗口, <C-w>gf=新标签
 keymap.set("n", "<leader>gf", "<C-w>gf", { desc = "新标签打开引用文件" })
 
--- 你可以通过点击关闭图标或右键点击任意标签来关闭缓冲区
+-- 浮动终端
+keymap.set("n", "<leader>tm", function()
+  Snacks.terminal()
+end, { desc = "切换浮动终端" })

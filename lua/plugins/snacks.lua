@@ -79,7 +79,11 @@ return {
     {
       "<leader>e",
       function()
-        Snacks.explorer()
+        local cwd = vim.fn.expand("%:p:h")
+        if cwd == "" then
+          cwd = nil
+        end
+        Snacks.explorer({ cwd = cwd })
       end,
       desc = "File Explorer文件资源管理器",
     },
