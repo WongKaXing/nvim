@@ -21,13 +21,21 @@ return {
       },
     },
     explorer = { enabled = true },
-    indent = { enabled = true },
-    input = { enabled = true },
-    notifier = {
+    picker = {
       enabled = true,
-      timeout = 3000,
+      sources = {
+        explorer = {
+          hidden = true,
+          win = {
+            list = {
+              keys = {
+                H = false, -- 禁用 Shift+H 切换隐藏文件
+              },
+            },
+          },
+        },
+      },
     },
-    picker = { enabled = true },
     quickfile = { enabled = true },
     scope = { enabled = true },
     scroll = { enabled = true },
