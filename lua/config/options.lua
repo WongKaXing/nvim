@@ -37,8 +37,8 @@ opt.clipboard:append("unnamedplus")
 opt.splitright = true
 opt.splitbelow = true
 
--- Tab 作为前缀键，降低延迟
-opt.timeoutlen = 50
+-- 按键超时 (默认 1000ms)
+opt.timeoutlen = 1000
 
 -- 不区分大小写搜索
 opt.ignorecase = true

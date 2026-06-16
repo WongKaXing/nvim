@@ -21,6 +21,7 @@ return {
   {
     "hedyhli/outline.nvim",
     lazy = false,
+    -- lazy = true,
     keys = {
       { "<leader>o", "<cmd>Outline<CR>", desc = "Toggle Outline" },
     },

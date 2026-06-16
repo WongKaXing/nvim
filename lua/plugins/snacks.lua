@@ -26,6 +26,14 @@ return {
       sources = {
         explorer = {
           hidden = true,
+          sort = function(a, b)
+            local function naturalize(s)
+              return (s or ""):gsub("(%d+)", function(d)
+                return string.format("%010d", tonumber(d))
+              end)
+            end
+            return naturalize(a.sort) < naturalize(b.sort)
+          end,
           win = {
             list = {
               keys = {
