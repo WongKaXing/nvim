@@ -15,6 +15,8 @@ return {
           init_options = {
             settings = {
               fixAll = true, -- 启用自动修复
+              -- 关键配置：禁用Ruff的Lint 功能
+              lint = { enabled = false },
             },
           },
         },
