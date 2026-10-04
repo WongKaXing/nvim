@@ -1,16 +1,15 @@
+-- Obsidian 笔记库（Mac / Debian 通用写法）
+-- 库路径按当前机器解析；如果这台机器上没有这个 vault，就直接禁用插件，
+-- 避免打开 markdown 时报 "FileNotFoundError: /Users/soc/Documents/Notes"
+-- （旧配置把 Mac 的绝对路径写死，Debian 上一开 md 就报错）。
+local vault = vim.fn.expand("~/Documents/Notes")
+
 return {
   "epwalsh/obsidian.nvim",
   version = "*", -- recommended, use latest release instead of latest commit
   lazy = true,
   ft = "markdown",
-  -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
-  -- event = {
-  --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
-  --   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/*.md"
-  --   -- refer to `:h file-pattern` for more examples
-  --   "BufReadPre path/to/my-vault/*.md",
-  --   "BufNewFile path/to/my-vault/*.md",
-  -- },
+  enabled = vim.fn.isdirectory(vault) == 1,
   dependencies = {
     -- Required.
     "nvim-lua/plenary.nvim",
@@ -21,7 +20,7 @@ return {
     workspaces = {
       {
         name = "personal",
-        path = "/Users/soc/Documents/Notes",
+        path = vault,
       },
     },
 
