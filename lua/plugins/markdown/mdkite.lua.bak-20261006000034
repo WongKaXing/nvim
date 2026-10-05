@@ -1,0 +1,20 @@
+-- Markdown 浏览器实时预览（mdkite.nvim）
+-- 前身就是 markdown-preview.nvim（iamcco 版已停更），纯 Lua、零 npm/Node 依赖，
+-- 由兄弟插件 kitehost.nvim 在本地起一个 HTTP 服务，浏览器里实时看渲染结果。
+-- 用法：:MdKite（= start）/ :MdKite stop / :MdKite refresh / :MdKite toggle
+-- 键位见 lua/config/keymaps.lua 的 <leader>mm / <leader>ms / <leader>mt
+return {
+  {
+    "selimacerbas/mdkite.nvim",
+    dependencies = { "selimacerbas/kitehost.nvim" },
+    -- 2.x 同时提供 mdkite / markdown_preview 两个模块，显式指定免得 lazy 猜错
+    main = "mdkite",
+    ft = { "markdown", "quarto" },
+    cmd = { "MdKite" },
+    opts = {
+      open_browser = true, -- 首次 :MdKite 自动开浏览器，之后复用同一个标签页
+      default_theme = "dark", -- 与 tokyonight 保持一致（浏览器里可随时切换）
+      filetypes = { "quarto" }, -- 除 markdown 外，quarto 文件也整篇按 Markdown 预览
+    },
+  },
+}

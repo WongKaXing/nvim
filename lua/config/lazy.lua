@@ -19,8 +19,20 @@ require("lazy").setup({
     -- add LazyVim and import its plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     -- import/override with your plugins
-    { import = "plugins" },
-    { import = "VeryLazyPlugins" },
+    -- 注意：lazy 的 import 不会自动进子目录（util.lua 的 lsmod 只在子目录有 init.lua 时才进），
+    -- 所以每个分类目录都要在这里显式列一行。新增分类目录时记得补上。
+    { import = "plugins" }, -- 顶层散装文件（留给临时试验）
+    { import = "plugins.edit" }, -- 编辑与补全
+    { import = "plugins.lsp" }, -- 语言支持（LSP / treesitter）
+    { import = "plugins.markdown" }, -- Markdown 全家桶
+    { import = "plugins.notes" }, -- 笔记
+    { import = "plugins.tools" }, -- 外部工具集成
+    { import = "plugins.ui" }, -- 外观与界面
+
+    { import = "VeryLazyPlugins" }, -- 以下按「VeryLazy 加载」维度分组
+    { import = "VeryLazyPlugins.markdown" },
+    { import = "VeryLazyPlugins.tools" },
+    { import = "VeryLazyPlugins.ui" },
   },
   defaults = {
     -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.

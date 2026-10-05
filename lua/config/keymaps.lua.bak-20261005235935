@@ -55,13 +55,13 @@ keymap.set("n", "<leader>sv", "<C-w>v", { desc = "水平新增窗口" }) -- 水�
 keymap.set("n", "<leader>yf", function()
   local path = vim.fn.expand("%:p")
   vim.fn.setreg("+", path)
-  vim.notify("cp: " .. path)
+  vim.notify("📋 " .. path)
 end, { desc = "拷贝当前文件路径" })
 
 keymap.set("n", "<leader>yp", function()
   local dir = vim.fn.expand("%:p:h")
   vim.fn.setreg("+", dir)
-  vim.notify("cp: " .. dir)
+  vim.notify("📋 " .. dir)
 end, { desc = "拷贝当前路径" })
 
 -- grn 智能回退：有支持改名的 LSP（.lua/.py 等）就用 LSP 语义改名；
@@ -187,6 +187,11 @@ keymap.set("n", "<leader>tw", ":Twilight<CR>", { desc = "开启Twilight专注模
 
 -- yazi
 keymap.set("n", "<leader>ya", "<cmd>Yazi cwd<cr>", { desc = "打开nvim工作目录中的文件管理器" })
+
+-- markdown 浏览器预览（mdkite.nvim）
+keymap.set("n", "<leader>mm", "<cmd>MdKite start<cr>", { desc = "开启Markdown预览" })
+keymap.set("n", "<leader>ms", "<cmd>MdKite stop<cr>", { desc = "关闭Markdown预览" })
+keymap.set("n", "<leader>mt", "<cmd>MdKite toggle<cr>", { desc = "切换Markdown预览" })
 
 -- markdown 侧边预览（md-render.nvim）：竖向分屏「源码 | 渲染」并排
 -- 已有渲染窗口时再按一次关掉（b:md_render 是插件给渲染缓冲区打的标记）
