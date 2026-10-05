@@ -196,35 +196,7 @@ return {
       end,
       desc = "Git文件日志",
     },
-    -- gh
-    {
-      "<leader>gi",
-      function()
-        Snacks.picker.gh_issue()
-      end,
-      desc = "GitHub Issues（开启）",
-    },
-    {
-      "<leader>gI",
-      function()
-        Snacks.picker.gh_issue({ state = "all" })
-      end,
-      desc = "GitHub Issues（全部）",
-    },
-    {
-      "<leader>gp",
-      function()
-        Snacks.picker.gh_pr()
-      end,
-      desc = "GitHub PR（开启）",
-    },
-    {
-      "<leader>gP",
-      function()
-        Snacks.picker.gh_pr({ state = "all" })
-      end,
-      desc = "GitHub PR（全部）",
-    },
+    -- GitHub Issues / PR 的键位（gi / gI / gp / gP）已删：需要 GitHub 仓库 + gh 登录，平时用不到
     -- Grep
     {
       "<leader>sb",
@@ -517,14 +489,6 @@ return {
         Snacks.rename.rename_file()
       end,
       desc = "重命名文件",
-    },
-    {
-      "<leader>gB",
-      function()
-        Snacks.gitbrowse()
-      end,
-      desc = "Git在线浏览",
-      mode = { "n", "v" },
     },
     {
       "<leader>gg",

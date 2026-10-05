@@ -49,7 +49,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 -- 窗口
-keymap.set("n", "<leader>sv", "<C-w>v", { desc = "水平新增窗口" }) -- 水平新增窗口
+-- <C-w>v = 竖着切一刀 → 左右两个窗口；<C-w>s = 横着切一刀 → 上下两个窗口
+keymap.set("n", "<leader>sv", "<C-w>v", { desc = "垂直分屏（左右）" })
+-- 关闭分屏放在窗口组（w），别占用 <leader>sk —— 那是 snacks 的「快捷键查询器」
+keymap.set("n", "<leader>wq", "<C-w>c", { desc = "关闭当前分屏" })
 
 -- 拷贝路径到系统剪贴板
 keymap.set("n", "<leader>yf", function()
@@ -101,89 +104,12 @@ keymap.set("x", "grn", function()
   grn_replace(text)
 end, { desc = "重命名（无 LSP 时退回当前文件替换）" })
 
--- -- ---------- 位置锚点（不管怎么移动都能一键回来） ---------- ---
--- -- 用法：在第 20 行按 \ 钉住 -> 跳到第 15 行某字符处复制/删改 -> 再按 \ 一键飞回第 20 行
--- -- 再按一次会飞回刚才离开的地方（两点之间来回跳）；| 把锚点重新钉在当前光标处
--- -- 注：内置的 <C-o> 只记得「跳转类」移动（15G / gg / } / 搜索 / mark），
--- --     15k、5k、f 这类相对移动，以及 :15 这类 Ex 行号命令都不进跳跃表，所以才要这个锚点
--- local ANCHOR_MARK = "z" -- 用缓冲区本地标记 z 存锚点，上方增删行时会跟着文字走（:marks 里能看到）
---
--- local function anchor_get()
---   local m = vim.api.nvim_buf_get_mark(0, ANCHOR_MARK)
---   return (m[1] and m[1] > 0) and m or nil
--- end
---
--- local function anchor_set(pos)
---   vim.api.nvim_buf_set_mark(0, ANCHOR_MARK, pos[1], pos[2], {})
--- end
---
--- local function anchor_goto(pos)
---   local buf = vim.api.nvim_get_current_buf()
---   local row = math.max(1, math.min(pos[1], vim.api.nvim_buf_line_count(buf)))
---   local line = vim.api.nvim_buf_get_lines(buf, row - 1, row, false)[1] or ""
---   local col = math.max(0, math.min(pos[2], math.max(#line - 1, 0)))
---   vim.api.nvim_win_set_cursor(0, { row, col })
---   vim.cmd("normal! zz") -- 目标行居中，方便看清上下文
--- end
-
--- nowait 说明：LazyVim 的 localleader 也是 \，它在 lua 文件里还留了个 <localleader>r
--- （Run Lua）；不加 nowait 的话，按 \ 会先等 1 秒看你是不是要补一个 r
--- keymap.set("n", "\\", function()
---   local here = vim.api.nvim_win_get_cursor(0)
---   local anchor = anchor_get()
---   if anchor then
---     anchor_set(here) -- 锚点换成离开的位置，实现两点之间来回跳
---     anchor_goto(anchor)
---     vim.notify(
---       ("📌 回到 %d:%d（再按一次飞回 %d:%d）"):format(anchor[1], anchor[2] + 1, here[1], here[2] + 1)
---     )
---   else
---     anchor_set(here)
---     vim.notify(("📌 已钉住 %d:%d，再按 \\ 飞回"):format(here[1], here[2] + 1))
---   end
--- end, { desc = "位置锚点：钉住 / 飞回", nowait = true })
---
--- keymap.set("n", "|", function()
---   local here = vim.api.nvim_win_get_cursor(0)
---   anchor_set(here)
---   vim.notify(("📌 锚点重设在 %d:%d"):format(here[1], here[2] + 1))
--- end, { desc = "位置锚点：重设到当前处" })
-
--- 拔掉 \ 的「前缀冲突」：LazyVim 在 lua 文件里绑了 <localleader>r = Run Lua（localleader 也是 \），
--- 有它在，按 \ 时 Vim 会先等 timeoutlen(1000ms) 看你要不要补个 r —— 这就是"跳转要等一下"的原因。
--- 这里把 Run Lua 挪到 <leader>rr，并删掉 lua 缓冲区里的 \r，让 \ 在任何文件里都立刻触发。
--- local function fix_lua_localleader_r(buf)
---   buf = (buf == nil or buf == 0) and vim.api.nvim_get_current_buf() or buf
---   if not vim.api.nvim_buf_is_valid(buf) or vim.bo[buf].filetype ~= "lua" then
---     return
---   end
---   keymap.set({ "n", "x" }, "<leader>rr", function()
---     Snacks.debug.run()
---   end, { buffer = buf, desc = "Run Lua" })
---   for _, mode in ipairs({ "n", "x" }) do
---     pcall(keymap.del, mode, "\\r", { buffer = buf })
---   end
--- end
--- vim.api.nvim_create_autocmd("FileType", {
---   pattern = "lua",
---   callback = function(args)
---     fix_lua_localleader_r(args.buf)
---   end,
--- })
--- fix_lua_localleader_r(0) -- 启动时就已经打开着 lua 文件的情况
-
--- ---------- undo keymaps ---------- ---
--- keymap.del("n", "<leader>-") -- 取消分屏键
-
 -----------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------
 
 -- ---------- 插件 ---------- ---
 keymap.set("n", "<D>h", "<C-w>h", { desc = "焦点移到左侧文件树" })
 keymap.set("n", "<D>l", "<C-w>l", { desc = "焦点移到右侧Outline" })
-
--- Twilight
-keymap.set("n", "<leader>tw", ":Twilight<CR>", { desc = "开启Twilight专注模式" })
 
 -- yazi
 keymap.set("n", "<leader>ya", "<cmd>Yazi cwd<cr>", { desc = "打开nvim工作目录中的文件管理器" })
@@ -234,4 +160,52 @@ keymap.set("n", "<leader>tt", function()
       term:focus()
     end
   end
-end, { desc = "切换调试终端（桌面中央）" })
+end, { desc = "浮动终端（桌面中央）" })
+
+-- ---------- 清理：删掉用不到的默认键位 ---------- ---
+-- 清单来源：按 nvim-leader-keymaps.md 里筛过的表 ——「表里还保留的 = 要删，已被删掉的 = 要留」。
+-- 只写 <leader> 后面的部分，每个键在 n / v / x / t 各模式都删一遍。
+-- 整块注释掉即可全部恢复。
+local drop_keys = {
+  -- 单键 / 符号
+  ",", "-", ".", "/", ":", "E", "K", "L", "N", "S", "Z", "`", "n", "z",
+  -- 缓冲区（b 组）
+  "bD", "bP", "bb", "bd", "bi", "bj", "bl", "bo", "bp", "br",
+  -- 代码 / LSP（c 组）
+  "cR", "cS", "cd", "cs", "cw",
+  -- 查找（f 组）
+  "fB", "fE", "fF", "fR", "fT", "fb", "fc", "fe", "fg", "fn", "fp", "fr", "ft",
+  -- Git（g 组）
+  "gD", "gG", "gL", "gS", "gb", "gd", "gf", "gg", "gl", "gs",
+  -- 搜索列表（s 组）
+  's"', "s/", "sB", "sC", "sD", "sG", "sH", "sM", "sR", "sS", "sT",
+  -- 注意：sk 不在清单里 —— 它是 snacks 的「快捷键查询器」，保留
+  "sa", "sb", "sc", "sd", "sh", "si", "sj", "sl", "sm", "sp", "sq", "sr", "ss", "st", "su",
+  -- 界面开关（u 组）
+  "uA", "uC", "uD", "uF", "uI", "uL", "uS", "uT", "uZ", "ua", "ub", "uc", "ud",
+  "uf", "ug", "uh", "ui", "ul", "un", "up", "ur", "us", "uw", "uz",
+  -- 窗口
+  "wm", "wq",
+  -- 诊断 / 列表（x 组）
+  "xL", "xQ", "xT", "xX", "xl", "xq", "xt", "xx",
+  -- 以下为上一轮已删的开发向键位，保留在清单里以便整块恢复
+  "dpp", "dps", "dph",
+  "sn", "sna", "snd", "snh", "snl", "snt",
+  "qs", "qS", "ql", "qd",
+  "<Tab><Tab>", "<Tab>[", "<Tab>]", "<Tab>d", "<Tab>f", "<Tab>l", "<Tab>o",
+  "gi", "gI", "gp", "gP", "gB", "gY",
+}
+
+local function drop_keys_now()
+  for _, k in ipairs(drop_keys) do
+    for _, mode in ipairs({ "n", "v", "x", "t" }) do
+      pcall(vim.keymap.del, mode, "<leader>" .. k)
+    end
+  end
+end
+
+-- 这些键位都是各插件 spec 在启动 / VeryLazy 阶段注册的，schedule 一帧后统一删
+vim.schedule(drop_keys_now)
+
+-- 菜单里显示的名字（分组名 / 键位描述）统一在 lua/plugins/ui/which-key.lua 里改成中文，
+-- 空分组（<leader>b / <leader>u）也在那里隐藏。

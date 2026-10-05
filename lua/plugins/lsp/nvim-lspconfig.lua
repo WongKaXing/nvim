@@ -39,8 +39,8 @@ local python_analysis = {
 local servers = {
   ["*"] = {
     keys = {
-      { "K", false }, -- 禁用默认 K hover
-      { "<leader>K", vim.lsp.buf.hover, desc = "悬停信息" }, -- hover 移到 <leader>K
+      -- 禁用 LazyVim 默认的 K = hover（K 已在 config/keymaps.lua 里全局改成「向上滚动 10 行」）
+      { "K", false },
     },
   },
 
