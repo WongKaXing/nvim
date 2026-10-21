@@ -24,6 +24,13 @@ return {
       },
     },
 
+    -- 关键：不要在保存时自动改写 YAML frontmatter。
+    -- obsidian.nvim 默认挂了 BufWritePre 钩子，每次 :w 都会往文件头部补
+    -- `id:` / `aliases:` / `tags:`，会污染手写的 YAML，也会把 Excalidraw
+    -- 绘图（.excalidraw.md）的 `excalidraw-plugin: parsed` 冲掉。
+    -- 关掉后 nvim 完全不动 md 的 frontmatter。
+    disable_frontmatter = true,
+
     -- see below for full list of options 👇
   },
 }

@@ -42,6 +42,7 @@ return {
         { "<leader>s", group = "搜索" },
         { "<leader>t", group = "终端" },
         { "<leader>w", group = "窗口" },
+        { "<leader>b", group = "缓冲区" },
         { "<leader>x", group = "诊断 / 列表" },
         { "<leader>y", group = "路径 / 文件管理" },
         { "<leader><tab>", group = "标签页" },
@@ -52,8 +53,8 @@ return {
         { "[", group = "上一个" },
         { "]", group = "下一个" },
 
-        -- ── 隐藏空分组：b（buffer）/ u（ui）里的键位已全部删除，分组标题还挂着 ──
-        { "<leader>b", hidden = true },
+        -- ── 隐藏空分组：u（ui）里的键位已全部删除，分组标题还挂着 ──
+        -- （<leader>b 已恢复：bd/bo/bb 三个关 buffer 的键位回来了）
         { "<leader>u", hidden = true },
 
         -- ── 键位描述中文化（LazyVim 默认给的是英文说明）──

@@ -1,8 +1,3 @@
--- Keymaps are automatically loaded on the VeryLazy event
--- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
--- Add any additional keymaps here
-
--- be like
 -- keymap.set("mode","ur_keymap", "command", {desc = "注释"})
 
 -- <leader>键位改为空格键
@@ -51,8 +46,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
 -- 窗口
 -- <C-w>v = 竖着切一刀 → 左右两个窗口；<C-w>s = 横着切一刀 → 上下两个窗口
 keymap.set("n", "<leader>sv", "<C-w>v", { desc = "垂直分屏（左右）" })
--- 关闭分屏放在窗口组（w），别占用 <leader>sk —— 那是 snacks 的「快捷键查询器」
-keymap.set("n", "<leader>wq", "<C-w>c", { desc = "关闭当前分屏" })
+-- 关闭窗口 / 分屏（显式定义一次，把 LazyVim 的英文说明换成中文）
+keymap.set("n", "<leader>wd", "<C-w>c", { desc = "关闭当前窗口 / 分屏" })
+
+-- 缓冲区（buffer = 打开的文件，和「窗口/分屏」是两回事）
+-- 关文件用这个；<leader>wd 只关格子，只剩一个窗口时还会报 E444
+keymap.set("n", "<leader>bd", function()
+  Snacks.bufdelete()
+end, { desc = "关闭当前 buffer（保留窗口）" })
 
 -- 拷贝路径到系统剪贴板
 keymap.set("n", "<leader>yf", function()
@@ -135,77 +136,6 @@ keymap.set("n", "<leader>mp", "<cmd>MdRender float<cr>", { desc = "浮动Markdow
 -- 内置: gf=当前窗口, <C-w>gf=新标签
 keymap.set("n", "<leader>gf", "<C-w>gf", { desc = "新标签打开引用文件" })
 
--- 浮动终端（桌面中央，用于调试）
-keymap.set("n", "<leader>tt", function()
-  local term, created = Snacks.terminal.get(nil, {
-    win = {
-      position = "float",
-      width = 0.8,
-      height = 0.8,
-      row = 0.1,
-      col = 0.1,
-      enter = true,
-      backdrop = false,
-      wo = { winblend = 14 },
-    },
-  })
-  if created then
-    vim.schedule(function()
-      vim.wo[term.win].winblend = 10
-      term:focus()
-    end)
-  else
-    term:toggle()
-    if term:valid() then
-      term:focus()
-    end
-  end
-end, { desc = "浮动终端（桌面中央）" })
-
--- ---------- 清理：删掉用不到的默认键位 ---------- ---
--- 清单来源：按 nvim-leader-keymaps.md 里筛过的表 ——「表里还保留的 = 要删，已被删掉的 = 要留」。
--- 只写 <leader> 后面的部分，每个键在 n / v / x / t 各模式都删一遍。
--- 整块注释掉即可全部恢复。
-local drop_keys = {
-  -- 单键 / 符号
-  ",", "-", ".", "/", ":", "E", "K", "L", "N", "S", "Z", "`", "n", "z",
-  -- 缓冲区（b 组）
-  "bD", "bP", "bb", "bd", "bi", "bj", "bl", "bo", "bp", "br",
-  -- 代码 / LSP（c 组）
-  "cR", "cS", "cd", "cs", "cw",
-  -- 查找（f 组）
-  "fB", "fE", "fF", "fR", "fT", "fb", "fc", "fe", "fg", "fn", "fp", "fr", "ft",
-  -- Git（g 组）
-  "gD", "gG", "gL", "gS", "gb", "gd", "gf", "gg", "gl", "gs",
-  -- 搜索列表（s 组）
-  's"', "s/", "sB", "sC", "sD", "sG", "sH", "sM", "sR", "sS", "sT",
-  -- 注意：sk 不在清单里 —— 它是 snacks 的「快捷键查询器」，保留
-  "sa", "sb", "sc", "sd", "sh", "si", "sj", "sl", "sm", "sp", "sq", "sr", "ss", "st", "su",
-  -- 界面开关（u 组）
-  "uA", "uC", "uD", "uF", "uI", "uL", "uS", "uT", "uZ", "ua", "ub", "uc", "ud",
-  "uf", "ug", "uh", "ui", "ul", "un", "up", "ur", "us", "uw", "uz",
-  -- 窗口
-  "wm", "wq",
-  -- 诊断 / 列表（x 组）
-  "xL", "xQ", "xT", "xX", "xl", "xq", "xt", "xx",
-  -- 以下为上一轮已删的开发向键位，保留在清单里以便整块恢复
-  "dpp", "dps", "dph",
-  "sn", "sna", "snd", "snh", "snl", "snt",
-  "qs", "qS", "ql", "qd",
-  "<Tab><Tab>", "<Tab>[", "<Tab>]", "<Tab>d", "<Tab>f", "<Tab>l", "<Tab>o",
-  "gi", "gI", "gp", "gP", "gB", "gY",
-}
-
-local function drop_keys_now()
-  for _, k in ipairs(drop_keys) do
-    for _, mode in ipairs({ "n", "v", "x", "t" }) do
-      pcall(vim.keymap.del, mode, "<leader>" .. k)
-    end
-  end
-end
-
--- 这些键位都是各插件 spec 在启动 / VeryLazy 阶段注册的，schedule 一帧后统一删
-vim.schedule(drop_keys_now)
-
--- 菜单里显示的名字（分组名 / 键位描述）统一在 lua/plugins/ui/which-key.lua 里改成中文，
--- 空分组（<leader>b / <leader>u）也在那里隐藏。
+-- ---------- 删掉用不到的默认键位 ----------
+-- 清单和删除逻辑都在 lua/config/drop_keymaps.lua（想恢复就注释掉下面这行）
+require("config.drop_keymaps").apply()
