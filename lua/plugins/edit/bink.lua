@@ -102,13 +102,29 @@ return {
       end, { nargs = "?", complete = function() return { "on", "off", "status" } end,
              desc = "开关饥荒 DST mod 片段补全" })
 
-      vim.keymap.set("n", "<leader>dm", function()
+      -- <leader>dm 只在 lua 文件里出现（DST mod 片段补全只对 lua 有意义）：
+      -- 用 FileType 自动命令挂 buffer-local 映射，which-key 也只在 lua buffer 里列出
+      local function toggle_dst()
         local c = vim.fn.confirm("饥荒 DST mod 片段补全（当前: " .. (enabled and "开启" or "关闭") .. "）",
           "&开启\t&关闭\t查看&状态", enabled and 2 or 1)
         if c == 1 then set(true, true)
         elseif c == 2 then set(false, true)
         elseif c == 3 then vim.cmd("DSTMod status") end
-      end, { desc = "DST mod 补全开关" })
+      end
+
+      local function bind_dst_keymap(buf)
+        vim.keymap.set("n", "<leader>dm", toggle_dst, { buffer = buf, desc = "DST mod 补全开关" })
+      end
+
+      vim.api.nvim_create_autocmd("FileType", {
+        group = vim.api.nvim_create_augroup("dst_mod_keymap", { clear = true }),
+        pattern = "lua",
+        callback = function(args) bind_dst_keymap(args.buf) end,
+      })
+      -- blink.cmp 的 config 可能晚于当前 buffer 的 FileType 事件，补绑一次
+      if vim.bo.filetype == "lua" then
+        bind_dst_keymap(vim.api.nvim_get_current_buf())
+      end
     end,
     opts = {
       keymap = {

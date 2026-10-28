@@ -31,6 +31,8 @@ return {
       })
     end,
     opts = {
+      -- 按下前缀立刻弹菜单（默认 200ms），不再有"按下去等一下才出菜单"的迟滞感
+      delay = 0,
       spec = {
         -- ── 分组名（LazyVim 默认是英文）──
         { "<leader>c", group = "代码" },
@@ -75,7 +77,15 @@ return {
         { "gI", desc = "跳转到实现" },
         { "gy", desc = "跳转到类型定义" },
         { "gO", desc = "显示当前文件的大纲" },
-        { "gr", group = "引用" },
+        { "gr", group = "引用 / 重构" },
+        -- gr* 是 nvim 0.11+ 自带的 LSP 映射（全局、不依赖是否挂了 LSP），
+        -- 只有 gr 不再是完整映射之后，这一组才展开得出来
+        { "gra", desc = "代码操作" },
+        { "grn", desc = "重命名（无 LSP 时退回当前文件替换）" },
+        { "grr", desc = "引用列表" },
+        { "gri", desc = "跳转到实现" },
+        { "grt", desc = "跳转到类型定义" },
+        { "grx", desc = "运行 Codelens" },
         { "ge", desc = "上一个词尾" },
         { "gf", desc = "打开光标下的文件" },
         { "gg", desc = "文件首行" },

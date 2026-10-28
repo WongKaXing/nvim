@@ -18,6 +18,8 @@ require("lazy").setup({
   spec = {
     -- add LazyVim and import its plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+    -- LazyVim 官方调试扩展：nvim-dap + dap-ui + dap-virtual-text（键位见 <leader>d）
+    { import = "lazyvim.plugins.extras.dap.core" },
     -- import/override with your plugins
     -- 注意：lazy 的 import 不会自动进子目录（util.lua 的 lsmod 只在子目录有 init.lua 时才进），
     -- 所以每个分类目录都要在这里显式列一行。新增分类目录时记得补上。

@@ -41,6 +41,15 @@ local servers = {
     keys = {
       -- 禁用 LazyVim 默认的 K = hover（K 已在 config/keymaps.lua 里全局改成「向上滚动 10 行」）
       { "K", false },
+      -- 禁用 LazyVim 默认的 gr = references（它带 nowait）：gr 一旦是「完整映射」，
+      -- 按 g r 就立刻弹引用列表，后面再按 n 已经晚了 —— grn / gra / gri / grt / grx
+      -- 整个 gr* 家族都被它吃掉，which-key 也永远展开不出 gr 子菜单。
+      -- 关掉后 gr 回到纯前缀，references 挪到 grr（见 plugins/ui/snacks.lua）。
+      { "gr", false },
+      -- 禁用 code lens 相关键位（Run Codelens / Refresh & Display Codelens）
+      -- 原理：lazy 的 keys.resolve 遇到 rhs=false 会把同 mode:lhs 的默认项从列表里删掉
+      { "<leader>cc", false, mode = { "n", "x" } },
+      { "<leader>cC", false },
     },
   },
 

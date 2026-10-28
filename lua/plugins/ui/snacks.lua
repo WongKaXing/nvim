@@ -390,12 +390,13 @@ return {
       end,
       desc = "跳转到声明",
     },
+    -- 引用放 grr：gr 留作纯前缀，否则 nowait 的 gr 会吃掉 grn/gra/gri/grt/grx
+    -- （nvim 0.11+ 自带的 gr* 映射），grn 也就按不出来了
     {
-      "gr",
+      "grr",
       function()
         Snacks.picker.lsp_references()
       end,
-      nowait = true,
       desc = "引用",
     },
     {
