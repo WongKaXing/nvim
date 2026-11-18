@@ -115,7 +115,9 @@ keymap.set("n", "<D>l", "<C-w>l", { desc = "焦点移到右侧Outline" })
 -- lazygit
 keymap.set("n", "<leader>lg", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
 
--- Lazy（插件管理器）：原来在 <leader>l，会和 <leader>lg 抢前缀，所以移到 <leader>ll
+-- Lazy（插件管理器）：原来在 <leader>l，会和 <leader>lg 抢前缀（完整映射又当前缀，
+-- 按完 l 要等 timeoutlen 才定，超时就弹 Lazy），所以挪到 <leader>L。
+-- ⚠️ drop_keymaps.lua 的单键列表里不能再有 "L"，否则 apply() 会把这行删掉（映射消失、which-key 也看不到）。
 keymap.set("n", "<leader>L", "<cmd>Lazy<cr>", { desc = "插件管理（Lazy）" })
 
 -- yazi
