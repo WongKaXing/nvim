@@ -112,6 +112,9 @@ end, { desc = "重命名（无 LSP 时退回当前文件替换）" })
 keymap.set("n", "<D>h", "<C-w>h", { desc = "焦点移到左侧文件树" })
 keymap.set("n", "<D>l", "<C-w>l", { desc = "焦点移到右侧Outline" })
 
+-- lazygit
+keymap.set("n", "<leader>lg", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
+
 -- yazi
 keymap.set("n", "<leader>ya", "<cmd>Yazi cwd<cr>", { desc = "打开nvim工作目录中的文件管理器" })
 
