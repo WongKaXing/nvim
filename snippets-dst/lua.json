@@ -1,0 +1,782 @@
+{
+  "prefabpostinit": {
+    "prefix": "prefabpostinit",
+    "body": [
+      "AddPrefabPostInit(\"${1:prefab}\", function(inst)",
+      "    if not TheWorld.ismastersim then return inst end",
+      "",
+      "    ${0}",
+      "end)"
+    ],
+    "description": "AddPrefabPostInit(prefab, fn) 单个 prefab 服务端改造"
+  },
+  "prefabpostinitany": {
+    "prefix": "prefabpostinitany",
+    "body": [
+      "AddPrefabPostInitAny(function(inst)",
+      "    ${0}",
+      "end)"
+    ],
+    "description": "AddPrefabPostInitAny(fn) 所有 prefab（慎用，性能敏感）"
+  },
+  "comppostinit": {
+    "prefix": "comppostinit",
+    "body": [
+      "AddComponentPostInit(\"${1:component}\", function(self, inst)",
+      "    ${0}",
+      "end)"
+    ],
+    "description": "AddComponentPostInit(component, fn) 改组件"
+  },
+  "classpost": {
+    "prefix": "classpost",
+    "body": [
+      "AddClassPostConstruct(\"${1:path/to/class}\", function(self, ...)",
+      "    ${0}",
+      "end)"
+    ],
+    "description": "AddClassPostConstruct(package, fn) 改类"
+  },
+  "globalclasspost": {
+    "prefix": "globalclasspost",
+    "body": [
+      "AddGlobalClassPostConstruct(\"${1:path/to/file}\", \"${2:ClassName}\", function(self, ...)",
+      "    ${0}",
+      "end)"
+    ],
+    "description": "AddGlobalClassPostConstruct(package, classname, fn)"
+  },
+  "playerpostinit": {
+    "prefix": "playerpostinit",
+    "body": [
+      "AddPlayerPostInit(function(inst)",
+      "    ${0}",
+      "end)"
+    ],
+    "description": "AddPlayerPostInit(fn) 玩家初始化"
+  },
+  "simpostinit": {
+    "prefix": "simpostinit",
+    "body": [
+      "AddSimPostInit(function()",
+      "    ${0}",
+      "end)"
+    ],
+    "description": "AddSimPostInit(fn) 世界初始化完成（所有 mod 加载后）"
+  },
+  "gamepostinit": {
+    "prefix": "gamepostinit",
+    "body": [
+      "AddGamePostInit(function()",
+      "    ${0}",
+      "end)"
+    ],
+    "description": "AddGamePostInit(fn) 游戏初始化"
+  },
+  "stategraphpostinit": {
+    "prefix": "stategraphpostinit",
+    "body": [
+      "AddStategraphPostInit(\"${1:sg_name}\", function(sg)",
+      "    ${0}",
+      "end)"
+    ],
+    "description": "AddStategraphPostInit(stategraph, fn) 改状态机"
+  },
+  "brainpostinit": {
+    "prefix": "brainpostinit",
+    "body": [
+      "AddBrainPostInit(\"${1:brain_name}\", function(brain)",
+      "    ${0}",
+      "end)"
+    ],
+    "description": "AddBrainPostInit(brain, fn) 改 AI 大脑"
+  },
+  "recipepostinit": {
+    "prefix": "recipepostinit",
+    "body": [
+      "AddRecipePostInit(\"${1:recipe_name}\", function(recipe)",
+      "    ${0}",
+      "end)"
+    ],
+    "description": "AddRecipePostInit(recipename, fn) 改配方"
+  },
+  "recipepostinitany": {
+    "prefix": "recipepostinitany",
+    "body": [
+      "AddRecipePostInitAny(function(recipe)",
+      "    ${0}",
+      "end)"
+    ],
+    "description": "AddRecipePostInitAny(fn) 所有配方"
+  },
+  "tasksetpreinit": {
+    "prefix": "tasksetpreinit",
+    "body": [
+      "AddTaskSetPreInit(\"${1:taskset}\", function(taskset)",
+      "    ${0}",
+      "end)"
+    ],
+    "description": "AddTaskSetPreInit(tasksetname, fn)"
+  },
+  "tasksetpreinitany": {
+    "prefix": "tasksetpreinitany",
+    "body": [
+      "AddTaskSetPreInitAny(function(taskset)",
+      "    ${0}",
+      "end)"
+    ],
+    "description": "AddTaskSetPreInitAny(fn) 所有任务集"
+  },
+  "taskpreinit": {
+    "prefix": "taskpreinit",
+    "body": [
+      "AddTaskPreInit(\"${1:task}\", function(task)",
+      "    ${0}",
+      "end)"
+    ],
+    "description": "AddTaskPreInit(taskname, fn)"
+  },
+  "roompreinit": {
+    "prefix": "roompreinit",
+    "body": [
+      "AddRoomPreInit(\"${1:room}\", function(room)",
+      "    ${0}",
+      "end)"
+    ],
+    "description": "AddRoomPreInit(roomname, fn)"
+  },
+  "levelpreinit": {
+    "prefix": "levelpreinit",
+    "body": [
+      "AddLevelPreInit(\"${1:level_id}\", function(level)",
+      "    ${0}",
+      "end)"
+    ],
+    "description": "AddLevelPreInit(levelid, fn)"
+  },
+  "levelpreinitany": {
+    "prefix": "levelpreinitany",
+    "body": [
+      "AddLevelPreInitAny(function(level)",
+      "    ${0}",
+      "end)"
+    ],
+    "description": "AddLevelPreInitAny(fn)"
+  },
+  "addrpc": {
+    "prefix": "addrpc",
+    "body": [
+      "AddModRPCHandler(\"${1:MyMod}\", \"${2:action}\", function(player, ${3:data})",
+      "    ${0}",
+      "end)"
+    ],
+    "description": "AddModRPCHandler(namespace, name, fn) 注册 mod RPC（服务端）"
+  },
+  "addshardrpc": {
+    "prefix": "addshardrpc",
+    "body": [
+      "AddShardModRPCHandler(\"${1:MyMod}\", \"${2:action}\", function(shard_id, ${3:data})",
+      "    ${0}",
+      "end)"
+    ],
+    "description": "AddShardModRPCHandler(namespace, name, fn) 分片间 RPC"
+  },
+  "addclientrpc": {
+    "prefix": "addclientrpc",
+    "body": [
+      "AddClientModRPCHandler(\"${1:MyMod}\", \"${2:action}\", function(player, ${3:data})",
+      "    ${0}",
+      "end)"
+    ],
+    "description": "AddClientModRPCHandler(namespace, name, fn) 客户端 RPC"
+  },
+  "sendrpc": {
+    "prefix": "sendrpc",
+    "body": [
+      "SendModRPCToServer(GetModRPC(\"${1:MyMod}\", \"${2:action}\"), ${3:data})"
+    ],
+    "description": "SendModRPCToServer(id_table, ...) 客户端→服务器"
+  },
+  "sendrpcclient": {
+    "prefix": "sendrpcclient",
+    "body": [
+      "SendModRPCToClient(GetClientModRPC(\"${1:MyMod}\", \"${2:action}\"), ${3:player}, ${4:data})"
+    ],
+    "description": "SendModRPCToClient(id_table, ...) 服务器→客户端"
+  },
+  "sendrpcshard": {
+    "prefix": "sendrpcshard",
+    "body": [
+      "SendModRPCToShard(GetShardModRPC(\"${1:MyMod}\", \"${2:action}\"), ${3:data})"
+    ],
+    "description": "SendModRPCToShard(id_table, ...) 分片间"
+  },
+  "getmodrpc": {
+    "prefix": "getmodrpc",
+    "body": [
+      "GetModRPC(\"${1:MyMod}\", \"${2:action}\")"
+    ],
+    "description": "GetModRPC(namespace, name)"
+  },
+  "addaction": {
+    "prefix": "addaction",
+    "body": [
+      "AddAction(\"${1:MY_ACTION}\", \"${2:执行描述}\", function(act)",
+      "    if act.doer and act.target then",
+      "        ${0}",
+      "        return true",
+      "    end",
+      "    return false",
+      "end, ${3:1})"
+    ],
+    "description": "AddAction(id, str, fn)"
+  },
+  "addcomponentaction": {
+    "prefix": "addcomponentaction",
+    "body": [
+      "AddComponentAction(\"${1:SCENE}\", \"${2:component}\", function(inst, doer, actions, right)",
+      "    ${0}",
+      "end)"
+    ],
+    "description": "AddComponentAction(actiontype, component, fn) 场景动作收集"
+  },
+  "addstategraphactionhandler": {
+    "prefix": "addstategraphactionhandler",
+    "body": [
+      "AddStategraphActionHandler(\"${1:sg_name}\", ActionHandler(ACTIONS.${2:MY_ACTION}, function(inst, action)",
+      "    ${0}",
+      "    return \"${3:dostate}\"",
+      "end))"
+    ],
+    "description": "AddStategraphActionHandler(stategraph, handler)"
+  },
+  "addstategraphstate": {
+    "prefix": "addstategraphstate",
+    "body": [
+      "AddStategraphState(\"${1:sg_name}\", State{",
+      "    name = \"${2:state_name}\",",
+      "    tags = { \"${3:busy}\" },",
+      "",
+      "    onenter = function(inst)",
+      "        ${0}",
+      "    end,",
+      "})"
+    ],
+    "description": "AddStategraphState(stategraph, state)"
+  },
+  "addstategraphevent": {
+    "prefix": "addstategraphevent",
+    "body": [
+      "AddStategraphEvent(\"${1:sg_name}\", EventHandler(\"${2:animover}\", function(inst, data)",
+      "    ${0}",
+      "end))"
+    ],
+    "description": "AddStategraphEvent(stategraph, event)"
+  },
+  "addrecipe2": {
+    "prefix": "addrecipe2",
+    "body": [
+      "AddRecipe2(\"${1:my_prefab}\", {",
+      "    Ingredient(\"${2:goldnugget}\", ${3:1}),",
+      "}, ${4:TECH.NONE}, {",
+      "    product = \"${1:my_prefab}\",",
+      "    image = \"${5:my_icon}.tex\",",
+      "    description = \"${6:描述}\",",
+      "}, { \"${7:STRUCTURES}\" })"
+    ],
+    "description": "推荐新 API（AddRecipe 已废弃）"
+  },
+  "addcharrecipe": {
+    "prefix": "addcharrecipe",
+    "body": [
+      "AddCharacterRecipe(\"${1:my_prefab}\", {",
+      "    Ingredient(\"${2:goldnugget}\", ${3:1}),",
+      "}, ${4:TECH.NONE}, {",
+      "    product = \"${1:my_prefab}\",",
+      "    image = \"${5:my_icon}.tex\",",
+      "}, { \"${6:CHARACTER}\" })"
+    ],
+    "description": "AddCharacterRecipe(name, ingredients, tech, config, extra_filters) 角色专属配方"
+  },
+  "addcookerrecipe": {
+    "prefix": "addcookerrecipe",
+    "body": [
+      "AddCookerRecipe(\"${1:cookpot}\", {",
+      "    name = \"${2:my_food}\",",
+      "    test = function(cooker, names, tags) return ${3:names.meat and names.meat >= 1} end,",
+      "    priority = ${4:0},",
+      "    weight = ${5:1},",
+      "    foodtype = \"${6:MEAT}\",",
+      "})"
+    ],
+    "description": "AddCookerRecipe(cooker, recipe) 烹饪锅配方"
+  },
+  "adddeconstructrecipe": {
+    "prefix": "adddeconstructrecipe",
+    "body": [
+      "AddDeconstructRecipe(\"${1:my_prefab}\", {",
+      "    Ingredient(\"${2:goldnugget}\", ${3:1}),",
+      "})"
+    ],
+    "description": "AddDeconstructRecipe(name, return_ingredients)"
+  },
+  "ingredient": {
+    "prefix": "ingredient",
+    "body": [
+      "Ingredient(\"${1:goldnugget}\", ${2:1})"
+    ],
+    "description": "配方材料"
+  },
+  "addminimapatlas": {
+    "prefix": "addminimapatlas",
+    "body": [
+      "AddMinimapAtlas(\"${1:images/minimap/myicon.xml}\")"
+    ],
+    "description": "AddMinimapAtlas(atlaspath) 给小地图加图集"
+  },
+  "reginvitematlas": {
+    "prefix": "reginvitematlas",
+    "body": [
+      "RegisterInventoryItemAtlas(\"${1:images/inventoryimages/myitem.xml}\", \"${2:my_prefab}\")"
+    ],
+    "description": "RegisterInventoryItemAtlas(atlas, prefabname)"
+  },
+  "addingredientvalues": {
+    "prefix": "addingredientvalues",
+    "body": [
+      "AddIngredientValues({\"${1:my_food}\"}, { ${2:veggie = 1} }, true, true)"
+    ],
+    "description": "AddIngredientValues(names, tags, cancook, candry)"
+  },
+  "remapsound": {
+    "prefix": "remapsound",
+    "body": [
+      "RemapSoundEvent(\"${1:old_sound}\", \"${2:new_sound}\")"
+    ],
+    "description": "RemapSoundEvent(name, new_name)"
+  },
+  "addmodcharacter": {
+    "prefix": "addmodcharacter",
+    "body": [
+      "AddModCharacter(\"${1:my_char}\", \"${2:NEUTRAL}\", { ${3:} })"
+    ],
+    "description": "AddModCharacter(name, gender, modes)"
+  },
+  "prototyperdef": {
+    "prefix": "prototyperdef",
+    "body": [
+      "AddPrototyperDef(\"${1:my_prefab}\", {",
+      "    actionstring = \"${2:使用}\",",
+      "    is_crafting_station = true,",
+      "})"
+    ],
+    "description": "AddPrototyperDef(prototyper_prefab, data)"
+  },
+  "getmodconfig": {
+    "prefix": "getmodconfig",
+    "body": [
+      "local ${1:option} = GetModConfigData(\"${2:KEY}\")"
+    ],
+    "description": "GetModConfigData(optionname, get_local_config) 读配置"
+  },
+  "modimport": {
+    "prefix": "modimport",
+    "body": [
+      "modimport(\"${1:path/file.lua}\")"
+    ],
+    "description": "modimport 引入 mod 内 lua（仅 modmain 可用）"
+  },
+  "loadpofile": {
+    "prefix": "loadpofile",
+    "body": [
+      "LoadPOFile(\"${1:languages/my.po}\", \"${2:zh}\")"
+    ],
+    "description": "LoadPOFile(path, lang) 加载翻译"
+  },
+  "spawnprefab": {
+    "prefix": "spawnprefab",
+    "body": [
+      "local ${1:ent} = SpawnPrefab(\"${2:prefab}\")"
+    ],
+    "description": "SpawnPrefab(prefab) 生成实体"
+  },
+  "spawnat": {
+    "prefix": "spawnat",
+    "body": [
+      "SpawnAt(\"${1:prefab}\", ${2:ThePlayer:GetPosition()})"
+    ],
+    "description": "SpawnAt(prefab, pos) 在指定位置生成"
+  },
+  "findentities": {
+    "prefix": "findentities",
+    "body": [
+      "local ${1:ents} = FindEntities(${2:x}, ${3:y}, ${4:z}, ${5:r}, { \"${6:tag}\" })"
+    ],
+    "description": "FindEntities(x,y,z,radius,tags) 按标签查实体"
+  },
+  "addcomponent": {
+    "prefix": "addcomponent",
+    "body": [
+      "inst:AddComponent(\"${1:component}\")"
+    ],
+    "description": "inst:AddComponent(name)"
+  },
+  "removecomponent": {
+    "prefix": "removecomponent",
+    "body": [
+      "inst:RemoveComponent(\"${1:component}\")"
+    ],
+    "description": "inst:RemoveComponent(name)"
+  },
+  "listenevent": {
+    "prefix": "listenevent",
+    "body": [
+      "inst:ListenForEvent(\"${1:event}\", function(inst, data)",
+      "    ${0}",
+      "end, ${2:TheWorld})"
+    ],
+    "description": "inst:ListenForEvent(event, fn, source)"
+  },
+  "pushevent": {
+    "prefix": "pushevent",
+    "body": [
+      "${1:TheWorld}:PushEvent(\"${2:event}\", { ${3:data} })"
+    ],
+    "description": "PushEvent(event, data)"
+  },
+  "addtag": {
+    "prefix": "addtag",
+    "body": [
+      "inst:AddTag(\"${1:tag}\")"
+    ],
+    "description": "inst:AddTag(tag)"
+  },
+  "hastag": {
+    "prefix": "hastag",
+    "body": [
+      "inst:HasTag(\"${1:tag}\")"
+    ],
+    "description": "inst:HasTag(tag)"
+  },
+  "dotaskintime": {
+    "prefix": "dotaskintime",
+    "body": [
+      "inst:DoTaskInTime(${1:1}, function()",
+      "    ${0}",
+      "end)"
+    ],
+    "description": "inst:DoTaskInTime(t, fn)"
+  },
+  "doperiodictask": {
+    "prefix": "doperiodictask",
+    "body": [
+      "inst:DoPeriodicTask(${1:1}, function()",
+      "    ${0}",
+      "end)"
+    ],
+    "description": "inst:DoPeriodicTask(t, fn)"
+  },
+  "makereadonly": {
+    "prefix": "makereadonly",
+    "body": [
+      "make_read_only(${1:tbl})"
+    ],
+    "description": "make read-only 表"
+  },
+  "prefab": {
+    "prefix": "prefab",
+    "body": [
+      "local function fn()",
+      "    local inst = CreateEntity()",
+      "",
+      "    inst.entity:AddTransform()",
+      "    inst.entity:AddAnimState()",
+      "    inst.entity:AddNetwork()",
+      "",
+      "    inst:AddTag(\"${1:structure}\")",
+      "",
+      "    inst.entity:SetPristine()",
+      "",
+      "    if not TheWorld.ismastersim then",
+      "        return inst",
+      "    end",
+      "",
+      "    inst:AddComponent(\"${2:inspectable}\")",
+      "    inst:AddComponent(\"${3:workable}\")",
+      "",
+      "    MakeHauntableWork(inst)",
+      "",
+      "    return inst",
+      "end",
+      "",
+      "return Prefab(\"${4:my_prefab}\", fn, assets)"
+    ],
+    "description": "完整 Prefab 骨架"
+  },
+  "component": {
+    "prefix": "component",
+    "body": [
+      "local ${1:MyComponent} = Class(function(self, inst)",
+      "    self.inst = inst",
+      "    ${0}",
+      "end)",
+      "",
+      "return ${1:MyComponent}"
+    ],
+    "description": "Component 类骨架"
+  },
+  "class": {
+    "prefix": "class",
+    "body": [
+      "local ${1:MyClass} = Class(function(self, ${2:inst})",
+      "    self.${2:inst} = ${2:inst}",
+      "    ${0}",
+      "end)",
+      "",
+      "return ${1:MyClass}"
+    ],
+    "description": "Class() 定义"
+  },
+  "mastersim": {
+    "prefix": "mastersim",
+    "body": [
+      "if not TheWorld.ismastersim then",
+      "    return ${1:inst}",
+      "end",
+      "$0"
+    ],
+    "description": "服务端守卫（最常用）"
+  },
+  "modinfo": {
+    "prefix": "modinfo",
+    "body": [
+      "name = \"${1:My Mod}\"",
+      "description = \"${2:描述}\"",
+      "author = \"${3:soc}\"",
+      "version = \"${4:1.0.0}\"",
+      "",
+      "forumthread = \"\"",
+      "",
+      "api_version = 10",
+      "",
+      "dst_compatible = true",
+      "all_clients_require_mod = ${5:false}",
+      "client_only_mod = ${6:false}",
+      "server_only_mod = false",
+      "",
+      "server_filter_tags = { \"${7:tag}\" },",
+      "",
+      "priority = ${8:0},"
+    ],
+    "description": "modinfo.lua 模板"
+  },
+  "modmain2": {
+    "prefix": "modmain2",
+    "body": [
+      "GLOBAL.setmetatable(env, { __index = function(t, k) return GLOBAL.rawget(GLOBAL, k) end })",
+      "",
+      "local IS_MOBILE = GLOBAL.IsMobile ~= nil and GLOBAL.IsMobile()",
+      "",
+      "local FW = {}",
+      "for _, k in ipairs({",
+      "    \"FW_LoadPrefabs\", \"FW_PreloadAssets\", \"FW_RegisterRecipe\",",
+      "    \"FW_BindWidgetTouch\", \"FW_RegisterModUI\", \"FW_RegisterModButton\",",
+      "    \"FW_RegisterAction\", \"FW_AddReplicableComponent\", \"FW_WrapMethod\",",
+      "}) do",
+      "    FW[k] = GLOBAL.rawget(GLOBAL, k)",
+      "end",
+      "",
+      "Assets = {",
+      "    ${0}",
+      "}"
+    ],
+    "description": "PC + 手机双端兼容骨架（官方推荐）"
+  },
+  "ismobile": {
+    "prefix": "ismobile",
+    "body": [
+      "local IS_MOBILE = GLOBAL.IsMobile ~= nil and GLOBAL.IsMobile()"
+    ],
+    "description": "手机端判定（PC 上不存在，必须判空）"
+  },
+  "fwprobe": {
+    "prefix": "fwprobe",
+    "body": [
+      "local FW = {}",
+      "for _, k in ipairs({",
+      "    \"FW_LoadPrefabs\", \"FW_PreloadAssets\", \"FW_RegisterRecipe\",",
+      "    \"FW_BindWidgetTouch\", \"FW_RegisterModUI\", \"FW_RegisterModButton\",",
+      "    \"FW_RegisterAction\", \"FW_AddReplicableComponent\", \"FW_WrapMethod\",",
+      "}) do",
+      "    FW[k] = GLOBAL.rawget(GLOBAL, k)",
+      "end"
+    ],
+    "description": "FW_* 能力探测（rawget 避开元表）"
+  },
+  "fwcall": {
+    "prefix": "fwcall",
+    "body": [
+      "local fw = GLOBAL.rawget(GLOBAL, \"${1:FW_LoadPrefabs}\")",
+      "if type(fw) == \"function\" then",
+      "    fw(modname, ${2:{}})",
+      "end"
+    ],
+    "description": "type 判空 + rawget 后再调用"
+  },
+  "fwpreload": {
+    "prefix": "fwpreload",
+    "body": [
+      "if IS_MOBILE and type(FW.FW_PreloadAssets) == \"function\" then",
+      "    FW.FW_PreloadAssets(modname, {",
+      "        \"${1:images/myitem.xml}\",",
+      "        \"${2:anim/myitem.zip}\",",
+      "    })",
+      "end"
+    ],
+    "description": "手机端预加载资源"
+  },
+  "fwloadprefabs": {
+    "prefix": "fwloadprefabs",
+    "body": [
+      "if IS_MOBILE and type(FW.FW_LoadPrefabs) == \"function\" then",
+      "    FW.FW_LoadPrefabs(modname, { \"${1:myitem}\" })",
+      "else",
+      "    PrefabFiles = { \"${1:myitem}\" }",
+      "end"
+    ],
+    "description": "注册 prefab（手机 FW_ / PC 回退）"
+  },
+  "fwtouch": {
+    "prefix": "fwtouch",
+    "body": [
+      "local bind = GLOBAL.rawget(GLOBAL, \"FW_BindWidgetTouch\")",
+      "if type(bind) == \"function\" then",
+      "    bind(modname, ${1:widget}, {",
+      "        ontap = function() return ${1:widget}.onclick() end,",
+      "    })",
+      "end"
+    ],
+    "description": "手机端触摸绑定"
+  },
+  "fwlongpress": {
+    "prefix": "fwlongpress",
+    "body": [
+      "local bind = GLOBAL.rawget(GLOBAL, \"FW_BindWidgetTouch\")",
+      "if type(bind) == \"function\" then",
+      "    bind(modname, ${1:root}, {",
+      "        width = ${2:420}, height = ${3:320},",
+      "        onlongpress = function() return ${1:root}:OnMouseButton(GLOBAL.MOUSEBUTTON_RIGHT, true) end,",
+      "    })",
+      "end"
+    ],
+    "description": "手机没有鼠标右键"
+  },
+  "fwmodui": {
+    "prefix": "fwmodui",
+    "body": [
+      "local register = GLOBAL.rawget(GLOBAL, \"FW_RegisterModUI\")",
+      "if type(register) == \"function\" then",
+      "    register(modname, ${1:root}, {",
+      "        id = \"${2:my_hud}\", name = \"${3:显示名}\",",
+      "        x = ${4:0}, y = ${5:0}, scale = 1,",
+      "        width = ${6:420}, height = ${7:320},",
+      "        visible_when = function(w) return w:IsVisible() end,",
+      "        apply_position = function(w, nx, ny) w:SetPosition(nx, ny, 0) end,",
+      "    })",
+      "end"
+    ],
+    "description": "让玩家拖拽/缩放你的 UI"
+  },
+  "fwmodbutton": {
+    "prefix": "fwmodbutton",
+    "body": [
+      "if GLOBAL.IsMobile ~= nil and GLOBAL.IsMobile()",
+      "    and type(GLOBAL.FW_RegisterModButton) == \"function\" then",
+      "    GLOBAL.FW_RegisterModButton(modname, {",
+      "        key = \"${1:MY_KEY}\",",
+      "        label = \"${2:按钮文字}\",",
+      "        visible = ${3:function(player) return true end},",
+      "        onpress = function() ${0} end,",
+      "    })",
+      "end"
+    ],
+    "description": "手机端屏幕按钮"
+  },
+  "fwrecipe": {
+    "prefix": "fwrecipe",
+    "body": [
+      "local registered",
+      "if IS_MOBILE and type(FW.FW_RegisterRecipe) == \"function\" then",
+      "    registered = FW.FW_RegisterRecipe(modname, {",
+      "        name = \"${1:myrecipe}\",",
+      "        ingredients = { Ingredient(\"${2:goldnugget}\", ${3:1}) },",
+      "        tech = ${4:TECH.NONE},",
+      "        config = { product = \"${1:myrecipe}\", image = \"${5:icon}.tex\" },",
+      "        filters = { \"${6:STRUCTURES}\" },",
+      "        register = AddRecipe2,",
+      "        override = true,",
+      "    })",
+      "end",
+      "if not registered then",
+      "    AddRecipe2(\"${1:myrecipe}\", { Ingredient(\"${2:goldnugget}\", ${3:1}) }, ${4:TECH.NONE}, {",
+      "        product = \"${1:myrecipe}\", image = \"${5:icon}.tex\",",
+      "    }, { \"${6:STRUCTURES}\" })",
+      "end"
+    ],
+    "description": "配方（手机优先 + PC 回退）"
+  },
+  "fwreplica": {
+    "prefix": "fwreplica",
+    "body": [
+      "local fw = GLOBAL.rawget(GLOBAL, \"FW_AddReplicableComponent\")",
+      "if type(fw) == \"function\" then",
+      "    fw(\"${1:mycomponent}\")",
+      "end"
+    ],
+    "description": "给组件加 replica（客机可见）"
+  },
+  "fwwrap": {
+    "prefix": "fwwrap",
+    "body": [
+      "local wrap = GLOBAL.rawget(GLOBAL, \"FW_WrapMethod\")",
+      "if type(wrap) == \"function\" then",
+      "    wrap(${1:dir}, ${2:tbl}, \"${3:MethodName}\", \"${4:MyMod}\", function(old, self, ...)",
+      "        ${0}",
+      "        return old(self, ...)",
+      "    end)",
+      "end"
+    ],
+    "description": "安全包裹引擎方法"
+  },
+  "pkgpath": {
+    "prefix": "pkgpath",
+    "body": [
+      "GLOBAL.package.path = GLOBAL.package.path .. \";scripts/mods/${1:MODDIR}/scripts/?.lua\""
+    ],
+    "description": "手机端必须补自己的 scripts 路径"
+  },
+  "gesturewarn": {
+    "prefix": "gesturewarn",
+    "body": [
+      "-- ⚠ 手机端不存在 GESTURE_ZOOM_IN/OUT、GESTURE_ROTATE_LEFT/RIGHT",
+      "--   用 GESTURE_2_FINGERS；PLAYER_CAMERA_MAX_DIST 80 → 65（洞穴 50）",
+      "${0}"
+    ],
+    "description": "手机端缺 GESTURE_ZOOM_IN/OUT"
+  },
+  "cameradist": {
+    "prefix": "cameradist",
+    "body": [
+      "local max_dist = TUNING.PLAYER_CAMERA_MAX_DIST or ${1:65}"
+    ],
+    "description": "不要硬编码 80"
+  },
+  "isconsolewarn": {
+    "prefix": "isconsolewarn",
+    "body": [
+      "-- ⚠ 判手机请用 IsMobile()，不要用 not IsConsole()",
+      "local IS_MOBILE = GLOBAL.IsMobile ~= nil and GLOBAL.IsMobile()"
+    ],
+    "description": "手机端 IsConsole 也可能为真"
+  }
+}
