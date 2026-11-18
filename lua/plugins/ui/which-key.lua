@@ -39,6 +39,7 @@ return {
         { "<leader>d", group = "调试" },
         { "<leader>f", group = "文件 / 查找" },
         { "<leader>g", group = "Git" },
+        { "<leader>L", group = "插件 / Lazy" },
         { "<leader>m", group = "Markdown" },
         { "<leader>q", group = "退出 / 会话" },
         { "<leader>s", group = "搜索" },

@@ -115,6 +115,9 @@ keymap.set("n", "<D>l", "<C-w>l", { desc = "焦点移到右侧Outline" })
 -- lazygit
 keymap.set("n", "<leader>lg", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
 
+-- Lazy（插件管理器）：原来在 <leader>l，会和 <leader>lg 抢前缀，所以移到 <leader>ll
+keymap.set("n", "<leader>L", "<cmd>Lazy<cr>", { desc = "插件管理（Lazy）" })
+
 -- yazi
 keymap.set("n", "<leader>ya", "<cmd>Yazi cwd<cr>", { desc = "打开nvim工作目录中的文件管理器" })
 
