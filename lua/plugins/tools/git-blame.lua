@@ -11,8 +11,8 @@ return {
     -- for example
     enabled = true, -- if you want to enable the plugin
     -- <author>、<committer>、<date>、<committer-date>、 <summary> , <sha>
-    message_template = " => <committer-date> : <summary> • By <author>",
-    date_format = "%r %H:%M", -- template for the date, check Date format section for more options
+    message_template = " => <committer-date> : <summary>",
+    date_format = "%r [%Y/%m/%d]", -- template for the date, check Date format section for more options
     virtual_text_column = 1, -- virtual text start column, check Start virtual text at column section for more options
   },
 }
